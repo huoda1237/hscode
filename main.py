@@ -35,7 +35,7 @@ def main():
         Entrance
     """
     args = argument.parse_argv(sys.argv)
-
+    print("开始查找111")    
     if args.print_help:
         argument.print_help()
         return
@@ -43,17 +43,23 @@ def main():
     chapter = args.chapter
     # 是否爬取所有页面
     all_search = args.all_chapters
+    print("开始查找222")       
+    for i in range(5, 10):
+        chapter = '0' + str(i)
+        print("开始查找"+chapter)
+        search_and_save(chapter, args)
 
-    if all_search:
-        # 01-09
-        for i in range(1, 10):
-            chapter = '0' + str(i)
-            search_and_save(chapter, args)
-        # 10-99
-        for i in range(10, 100):
-            search_and_save(str(i), args)
-    else:
-        search_and_save(str(chapter), args)
+    # if all_search:
+    #     # 01-09
+    #     for i in range(1, 10):
+    #         chapter = '0' + str(i)
+    #         print("开始查找"+chapter)
+    #         search_and_save(chapter, args)
+    #     # 10-99
+    #     # for i in range(10, 100):
+    #     #     search_and_save(str(i), args)
+    # else:
+    #     search_and_save(str(chapter), args)
 
 
 main()
