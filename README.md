@@ -1,5 +1,15 @@
 # 海关编码查询
 
+
+cd "/Users/ezink/Desktop/hscode-master"
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip3 install beautifulsoup4 lxml
+
+python3 main.py --file-root /Users/ezink/Desktop/hscode_output
+
+
 [![codecov](https://codecov.io/gh/sheepzh/hscode/branch/master/graph/badge.svg?token=5DX131J0LI)](https://codecov.io/gh/sheepzh/hscode)
 [![](https://img.shields.io/github/license/sheepzh/hscode)](https://github.com/sheepzh/hscode/blob/main/LICENSE)
 [![](https://img.shields.io/github/v/release/sheepzh/hscode)](https://github.com/sheepzh/hscode/releases)
