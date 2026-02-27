@@ -4,6 +4,7 @@
 """
 import time
 import os
+import json
 
 
 def check_directory(root_dir, write_to_latest=False):
@@ -18,21 +19,41 @@ def check_directory(root_dir, write_to_latest=False):
             os.makedirs(latest_dir)
 
 
+# def write(root_dir, chapter, rows, write_to_latest=False, include_outdated=False):
+#     """
+#         Write to the file
+#     """
+#     check_directory(root_dir, write_to_latest)
+#     curr_date = time.strftime('%Y%m%d_%H:%M', time.localtime())
+#     outdated_str = "including_outdated_" if include_outdated else ''
+#     file_name = 'hscode_' + outdated_str + chapter + '_' + curr_date + '.txt'
+
+#     rows_str = ["{}".format(row) for row in rows]
+#     content = "\r\n".join(rows_str)
+#     with open(os.path.join(root_dir, file_name), 'w') as file:
+#         file.writelines(content)
+
+#     if write_to_latest:
+#         latest_name = 'hscode_' + outdated_str + chapter + '.txt'
+#         with open(os.path.join(root_dir, 'latest', latest_name), 'w') as file:
+#             file.writelines(content)
+
 def write(root_dir, chapter, rows, write_to_latest=False, include_outdated=False):
     """
-        Write to the file
+        Write to the JSON file
     """
     check_directory(root_dir, write_to_latest)
     curr_date = time.strftime('%Y%m%d_%H:%M', time.localtime())
     outdated_str = "including_outdated_" if include_outdated else ''
-    file_name = 'hscode_' + outdated_str + chapter + '_' + curr_date + '.txt'
-
-    rows_str = ["{}".format(row) for row in rows]
-    content = "\r\n".join(rows_str)
-    with open(os.path.join(root_dir, file_name), 'w') as file:
-        file.writelines(content)
+    file_name = 'hscode_' + outdated_str + chapter + '_' + curr_date + '.json'
+    
+    # 直接将rows（JSON数组）写入JSON文件
+    content = json.dumps(rows, ensure_ascii=False, indent=2)
+    
+    with open(os.path.join(root_dir, file_name), 'w', encoding='utf-8') as file:
+        file.write(content)
 
     if write_to_latest:
-        latest_name = 'hscode_' + outdated_str + chapter + '.txt'
-        with open(os.path.join(root_dir, 'latest', latest_name), 'w') as file:
-            file.writelines(content)
+        latest_name = 'hscode_' + outdated_str + chapter + '.json'
+        with open(os.path.join(root_dir, 'latest', latest_name), 'w', encoding='utf-8') as file:
+            file.write(content)
